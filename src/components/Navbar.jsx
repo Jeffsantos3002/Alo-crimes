@@ -39,11 +39,11 @@ function Navbar(){
               </svg>
             </label>
           </div> 
-          <div className="navbar-start">
+          <div className="navbar-start w-full flex flex-row justify-center lg:justify-start">
             <p className="px-2 mx-2 text-white font-bold text-2xl">Alô Crimes</p>
             <img src={logo} alt="logo"/>
           </div>
-          <div className="navbar-end menu menu-horizontal hidden lg:flex justify-end hidden space-x-2.5">
+          <div className="w-full navbar-end menu menu-horizontal hidden lg:flex justify-end hidden space-x-2.5">
 
             {rotas.map((page, index)=>(
                 <Link to={page.to} className="text-white font-bold uppercase text-base" key={index}>{page.text}</Link>
