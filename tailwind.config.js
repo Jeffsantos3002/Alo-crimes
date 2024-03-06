@@ -12,7 +12,8 @@ export default {
       colors: {
         blue: "#1351B4",
         blueBold: "#004984",
-        footer: '#D9D9D9'
+        footer: '#D9D9D9',
+        bgPage: '#FAF8F6'
       }
     },
   },
