@@ -20,7 +20,7 @@ Este projeto tem como foco o desenvolvimento da plataforma, proporcionando um am
 
 Primeiramente acesse a pasta frontend do projeto para executalo.
 
-### verifique se possui as instalações de Node.js com o npm.
+ Verifique se possui as instalações de Node.js com o npm.
 
 ### Instalação das Dependências
 ```
