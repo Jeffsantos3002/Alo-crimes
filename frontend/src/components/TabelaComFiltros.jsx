@@ -47,22 +47,6 @@ function TabelaComFiltro() {
     setOrdem({atributo: atributo, direcao: event.target.value}); // Atualiza o estado da ordenação com o novo atributo e direção
   };
 
-  // Mapeia os nomes dos meses para seus respectivos números
-  const monthToNumber = {
-    'janeiro': 1,
-    'fevereiro': 2,
-    'marco': 3,
-    'abril': 4,
-    'maio': 5,
-    'junho': 6,
-    'julho': 7,
-    'agosto': 8,
-    'setembro': 9,
-    'outubro': 10,
-    'novembro': 11,
-    'dezembro': 12
-  };
-
   return (
     <div className="w-full bg-white rounded-xl px-2.5 py-4">
       <div className="flex flex-row justify-between">
@@ -88,12 +72,30 @@ function TabelaComFiltro() {
             <option value="desc">{atributo}: Ordem alfabética decrescente</option>
           </select>
         ))}
+        {border === 1 && (
+          <select onChange={(event) => handleOrderChange('Mês', event)}>
+            <option value="asc">Mês: Ordem crescente</option>
+            <option value="desc">Mês: Ordem decrescente</option>
+          </select>
+        )}
+        {border === 1 && (
+          <select onChange={(event) => handleOrderChange('Ano', event)}>
+            <option value="asc">Ano: Menor para maior</option>
+            <option value="desc">Ano: Maior para menor</option>
+          </select>
+        )}
+        {border === 1 && (
+          <select onChange={(event) => handleOrderChange('Ocorrências', event)}>
+            <option value="asc">Ocorrências: Menor para maior</option>
+            <option value="desc">Ocorrências: Maior para menor</option>
+          </select>
+        )}
         {border === 2 && ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Sexo', 'Vítimas'].map((atributo, index) => (
           <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
             {atributo === 'Sexo' ? (
               <>
-                <option value="masculino">Masculino</option>
-                <option value="feminino">Feminino</option>
+                <option value="masculino">Sexo: Masculino</option>
+                <option value="feminino">Sexo: Feminino</option>
                 <option value="ni">Sexo NI</option>
               </>
             ) : (
@@ -106,28 +108,10 @@ function TabelaComFiltro() {
         ))}
         {border === 3 && ['Município', 'Sigla UF', 'Região', 'Mês/Ano', 'Vítimas'].map((atributo, index) => (
           <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
-            <option value="asc">{atributo}: Ordem alfabética </option>
+            <option value="asc">{atributo}: Ordem crescente</option>
             <option value="desc">{atributo}: Ordem decrescente</option>
           </select>
         ))}
-        {border !== 2 && (
-          <select onChange={(event) => handleOrderChange('Mês', event)}>
-            <option value="asc">Mês: Ordem crescente</option>
-            <option value="desc">Mês: Ordem decrescente</option>
-          </select>
-        )}
-        {border !== 2 && (
-          <select onChange={(event) => handleOrderChange('Ano', event)}>
-            <option value="asc">Ano: Menor para maior</option>
-            <option value="desc">Ano: Maior para menor</option>
-          </select>
-        )}
-        {border === 1 && (
-          <select onChange={(event) => handleOrderChange('Ocorrências', event)}>
-            <option value="asc">Ocorrências: Menor para maior</option>
-            <option value="desc">Ocorrências: Maior para menor</option>
-          </select>
-        )}
       </div>
       <div className="overflow-x-auto">
         <table className="table">
