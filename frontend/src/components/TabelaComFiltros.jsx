@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
-import Detalhes from "./Detalhes"; // Importando o componente Detalhes
-import ocorrencias from "../../data/ocorrencias"; // Importando dados de ocorrencias
-import vitimas from "../../data/vitimas"; // Importando dados de vitimas
-import municipios from "../../data/municipios"; // Importando dados de municipios
+import Detalhes from "./Detalhes";
+import ocorrencias from "../../data/ocorrencias";
+import vitimas from "../../data/vitimas";
+import municipios from "../../data/municipios";
 
 function TabelaComFiltro() {
-  // Definindo os cabeçalhos das colunas para cada tipo de tabela
   const colOcorrencias = ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Ocorrências'];
   const colVitimas = ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Sexo', 'Vítimas'];
   const colMunicipios = ['Município', 'Sigla UF', 'Região', 'Mês/Ano', 'Vítimas'];
 
-  // Estados
-  const [col, setCol] = useState(colOcorrencias); // Estado para armazenar as colunas atuais
-  const [border, setBorder] = useState(1); // Estado para armazenar o estilo da borda
-  const [dados, setDados] = useState(ocorrencias); // Estado para armazenar os dados atuais
+  const [col, setCol] = useState(colOcorrencias);
+  const [border, setBorder] = useState(1);
+  const [dados, setDados] = useState(ocorrencias);
   const [ordem, setOrdem] = useState({atributo: 'UF', direcao: 'asc'}); // Estado para armazenar o atributo e a direção da ordenação
 
-  // Função para alterar a tabela de acordo com o botão selecionado
   const handleTable = (table) => {
     setBorder(table);
     switch (table) {
@@ -38,25 +35,36 @@ function TabelaComFiltro() {
     }
   };
 
-  // Efeito para exibir o estado border no console sempre que col for alterado
   useEffect(() => {
     console.log(border);
   }, [col]);
 
-  // Função para verificar os detalhes
   const verificar = (linha)=>{
     console.log(linha)
-  };
+  }
 
-  // Função para lidar com a mudança de ordenação
   const handleOrderChange = (atributo, event) => {
     setOrdem({atributo: atributo, direcao: event.target.value}); // Atualiza o estado da ordenação com o novo atributo e direção
   };
 
-  // Renderização do componente
+  // Mapeia os nomes dos meses para seus respectivos números
+  const monthToNumber = {
+    'janeiro': 1,
+    'fevereiro': 2,
+    'marco': 3,
+    'abril': 4,
+    'maio': 5,
+    'junho': 6,
+    'julho': 7,
+    'agosto': 8,
+    'setembro': 9,
+    'outubro': 10,
+    'novembro': 11,
+    'dezembro': 12
+  };
+
   return (
     <div className="w-full bg-white rounded-xl px-2.5 py-4">
-      {/* Botões para alternar entre tabelas */}
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-8">
           <div className="flex flex-col items-center">
@@ -73,49 +81,72 @@ function TabelaComFiltro() {
           </div>
         </div>
       </div>
-      {/* Seletores de ordenação */}
       <div className="flex flex-row justify-between">
-        {['UF', 'Tipo Crime', 'Mês'].map((atributo, index) => (
+        {border !== 2 && ['UF', 'Tipo Crime'].map((atributo, index) => (
           <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
-            <option value="asc">{atributo}: Ordem alfabética cres</option>
-            <option value="desc">{atributo}: Ordem alfabética descres</option>
+            <option value="asc">{atributo}: Ordem alfabética crescente</option>
+            <option value="desc">{atributo}: Ordem alfabética decrescente</option>
           </select>
         ))}
-        <select onChange={(event) => handleOrderChange('Ano', event)}>
-          <option value="asc">Ano: Menor para maior</option>
-          <option value="desc">Ano: Maior para menor</option>
-        </select>
-        <select onChange={(event) => handleOrderChange('Ocorrências', event)}>
-          <option value="asc">Ocorrências: Menor para maior</option>
-          <option value="desc">Ocorrências: Maior para menor</option>
-        </select>
+        {border === 2 && ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Sexo', 'Vítimas'].map((atributo, index) => (
+          <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
+            {atributo === 'Sexo' ? (
+              <>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+                <option value="ni">Sexo NI</option>
+              </>
+            ) : (
+              <>
+                <option value="asc">{atributo}: Ordem crescente</option>
+                <option value="desc">{atributo}: Ordem decrescente</option>
+              </>
+            )}
+          </select>
+        ))}
+        {border !== 2 && (
+          <select onChange={(event) => handleOrderChange('Mês', event)}>
+            <option value="asc">Mês: Ordem crescente</option>
+            <option value="desc">Mês: Ordem decrescente</option>
+          </select>
+        )}
+        {border !== 2 && (
+          <select onChange={(event) => handleOrderChange('Ano', event)}>
+            <option value="asc">Ano: Menor para maior</option>
+            <option value="desc">Ano: Maior para menor</option>
+          </select>
+        )}
+        {border === 1 && (
+          <select onChange={(event) => handleOrderChange('Ocorrências', event)}>
+            <option value="asc">Ocorrências: Menor para maior</option>
+            <option value="desc">Ocorrências: Maior para menor</option>
+          </select>
+        )}
       </div>
-      {/* Tabela */}
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
             <tr>
-              {/* Cabeçalhos das colunas */}
               {col.map((coluna, index) => (
                 <th className="font-medium text-base text-black" key={index}>{coluna}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {/* Ordenação e mapeamento dos dados */}
             {dados.sort((a, b) => {
-              if (typeof a[ordem.atributo] === 'string') {
+              // Verifica se o atributo é um mês e ordena numericamente
+              if (ordem.atributo === 'Mês') {
+                return ordem.direcao === "asc" ? monthToNumber[a[ordem.atributo]] - monthToNumber[b[ordem.atributo]] : monthToNumber[b[ordem.atributo]] - monthToNumber[a[ordem.atributo]];
+              } else if (typeof a[ordem.atributo] === 'string') {
                 return ordem.direcao === "asc" ? a[ordem.atributo].localeCompare(b[ordem.atributo]) : b[ordem.atributo].localeCompare(a[ordem.atributo]);
               } else {
                 return ordem.direcao === "asc" ? a[ordem.atributo] - b[ordem.atributo] : b[ordem.atributo] - a[ordem.atributo];
               }
             }).map((linha, index) => (
               <tr className="hover" key={index}>
-                {/* Renderização das células */}
                 {col.map((coluna, columnIndex) => (
                   <td className="text-sm text-black" key={columnIndex}>{linha[coluna]}</td>
                 ))}
-                {/* Componente Detalhes */}
                 <td><Detalhes tabela={linha} onClick={verificar(linha)} /></td>
               </tr>
             ))}
