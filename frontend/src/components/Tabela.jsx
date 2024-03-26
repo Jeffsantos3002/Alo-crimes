@@ -9,27 +9,27 @@ function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, c
   const [border, setBorder] = useState(1);
   const [dados, setDados] = useState(ocorrencias);
 
+  //Os dados serão exibidos de acordo com a coluna selecionada
   const handleTable = (table) => {
     setBorder(table);
     switch (table) {
       case 1:
-        setCol(colOcorrencias);
-        setDados(ocorrencias);
+        handleColuna(colOcorrencias, ocorrencias)
         break;
       case 2:
-        setCol(colVitimas);
-        setDados(vitimas);
-        break;
-      case 3:
-        setCol(colMunicipios);
-        setDados(municipios);
+        handleColuna(colVitimas, vitimas)
         break;
       default:
-        setCol(colOcorrencias);
-        setDados(ocorrencias);
+        handleColuna(colMunicipios, municipios)
     }
   };
 
+  // Recebe coluna e dados que serão modificados, além de definir página 1 como default
+  const handleColuna = (col, dados) =>{
+    setCol(col)
+    setDados(dados)
+    setCurrentPage(1)
+  }
   // Paginação
 const [currentPage, setCurrentPage] = useState(1);
 const itemsPerPage = 15; // Número de itens por página
