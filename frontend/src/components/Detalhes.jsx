@@ -18,9 +18,9 @@ function Detalhes({ tabela }) {
     setModalVisible(false);
   };
 
-  useEffect(() => {
-    console.log(info);
-  }, [info]);
+  // useEffect(() => {
+  //   console.log(info);
+  // }, [info]);
 
   return (
     <div>

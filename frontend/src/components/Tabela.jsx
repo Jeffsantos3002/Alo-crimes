@@ -1,13 +1,8 @@
-import { useState, useEffect } from "react";
-import Detalhes from "./Detalhes";
-import ocorrencias from "../../data/ocorrencias";
-import vitimas from "../../data/vitimas";
-import municipios from "../../data/municipios";
+import { useState} from "react";
 
-function Tabela() {
-  const colOcorrencias = ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Ocorrências'];
-  const colVitimas = ['UF', 'Tipo Crime', 'Ano', 'Mês', 'Sexo', 'Vítimas'];
-  const colMunicipios = ['Município', 'Sigla UF', 'Região', 'Mês/Ano', 'Vítimas'];
+import Detalhes from "./Detalhes";
+
+function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, colMunicipios}) {
 
   const [col, setCol] = useState(colOcorrencias);
   const [border, setBorder] = useState(1);
@@ -34,17 +29,13 @@ function Tabela() {
     }
   };
 
-  useEffect(() => {
-    console.log(border);
-  }, [col]);
-
   const verificar = (linha)=>{
-    console.log(linha)
+    // console.log(linha)
   }
 
   return (
     <div className="w-full bg-white rounded-xl px-2.5 py-4">
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between mb-12">
         <div className="flex flex-row space-x-8">
           <div className="flex flex-col items-center">
             <button onClick={() => handleTable(1)} className="text-2xl">Ocorrências</button>
@@ -68,7 +59,10 @@ function Tabela() {
       </div>
       <div className="overflow-x-auto">
         <table className="table">
-          <thead>
+        {/* Verifica se a tabela tá vazia */}
+         { col ?
+          <>         
+         <thead>
             <tr>
               {col.map((coluna, index) => (
                 <th className="font-medium text-base text-black" key={index}>{coluna}</th>
@@ -84,7 +78,9 @@ function Tabela() {
                 <td><Detalhes tabela={linha} onClick={verificar(linha)} /></td>
               </tr>
             ))}
-          </tbody>
+          </tbody> 
+          </> 
+          : <p className="text-center text-2xl">Nenhum dado encontrado...</p>}
         </table>
       </div>
     </div>
