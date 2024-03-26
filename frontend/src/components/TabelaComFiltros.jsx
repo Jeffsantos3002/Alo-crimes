@@ -82,7 +82,7 @@ function TabelaComFiltro() {
         </div>
       </div>
       <div className="flex flex-row justify-between">
-        {border !== 2 && ['UF', 'Tipo Crime'].map((atributo, index) => (
+        {border === 1 && ['UF', 'Tipo Crime'].map((atributo, index) => (
           <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
             <option value="asc">{atributo}: Ordem alfabética crescente</option>
             <option value="desc">{atributo}: Ordem alfabética decrescente</option>
@@ -102,6 +102,12 @@ function TabelaComFiltro() {
                 <option value="desc">{atributo}: Ordem decrescente</option>
               </>
             )}
+          </select>
+        ))}
+        {border === 3 && ['Município', 'Sigla UF', 'Região', 'Mês/Ano', 'Vítimas'].map((atributo, index) => (
+          <select key={index} onChange={(event) => handleOrderChange(atributo, event)}>
+            <option value="asc">{atributo}: Ordem alfabética </option>
+            <option value="desc">{atributo}: Ordem decrescente</option>
           </select>
         ))}
         {border !== 2 && (
