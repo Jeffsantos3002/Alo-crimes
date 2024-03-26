@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
+import DetalhesGraficoPizza from "../DetalhesGraficoPizza";
 
-import ocorrencias from "../../data/ocorrencias";
-import vitimas from "../../data/vitimas";
-import municipios from "../../data/municipios";
+import ocorrencias from "../../../data/ocorrencias";
+import vitimas from "../../../data/vitimas";
+import municipios from "../../../data/municipios";
 
 function GraficoPizza({ filtro1, filtro2, filtro3, filtro4, filtro5 }) {
   const [data, setData] = useState(null);
@@ -64,12 +65,11 @@ function GraficoPizza({ filtro1, filtro2, filtro3, filtro4, filtro5 }) {
   }, [filtro1, filtro2, filtro3, filtro4, filtro5]);
 
   if (!data) {
-    return null; // or a loading indicator
+    return null; 
   }
 
   return (
     <div>
-      <h2>Gráfico de Pizza</h2>
       <Doughnut data={data} />
     </div>
   );
