@@ -14,6 +14,21 @@ function TabelaComFiltro() {
   const [dados, setDados] = useState(ocorrencias);
   const [ordem, setOrdem] = useState({atributo: 'UF', direcao: 'asc'}); // Estado para armazenar o atributo e a direção da ordenação
 
+  const monthToNumber = {
+    'Janeiro': 1,
+    'Fevereiro': 2,
+    'Março': 3,
+    'Abril': 4,
+    'Maio': 5,
+    'Junho': 6,
+    'Julho': 7,
+    'Agosto': 8,
+    'Setembro': 9,
+    'Outubro': 10,
+    'Novembro': 11,
+    'Dezembro': 12
+  };
+
   const handleTable = (table) => {
     setBorder(table);
     switch (table) {
