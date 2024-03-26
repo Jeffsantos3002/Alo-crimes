@@ -81,7 +81,7 @@ const dadosPaginados = dados.slice(startIndex, endIndex);
          <thead>
             <tr>
               {col.map((coluna, index) => (
-                <th className="font-medium text-base text-black" key={index}>{coluna}</th>
+                <th className="font-medium text-base text-center text-black" key={index}>{coluna}</th>
               ))}
             </tr>
           </thead>
@@ -89,7 +89,7 @@ const dadosPaginados = dados.slice(startIndex, endIndex);
             {dadosPaginados.map((linha, index) => (
               <tr className="hover" key={index}>
                 {col.map((coluna, columnIndex) => (
-                  <td className="text-sm text-black" key={columnIndex}>{linha[coluna]}</td>
+                  <td className="text-sm text-black text-center" key={columnIndex}>{linha[coluna]}</td>
                 ))}
                 <td><Detalhes tabela={linha} onClick={verificar(linha)} /></td>
               </tr>
