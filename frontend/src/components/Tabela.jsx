@@ -1,6 +1,7 @@
 import { useState} from "react";
 
 import Detalhes from "./Detalhes";
+import Paginacao from "./Paginacao";
 
 function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, colMunicipios}) {
 
@@ -28,6 +29,21 @@ function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, c
         setDados(ocorrencias);
     }
   };
+
+  // Paginação
+const [currentPage, setCurrentPage] = useState(1);
+const itemsPerPage = 15; // Número de itens por página
+const totalPages = Math.ceil(dados.length / itemsPerPage);
+
+const handlePageChange = (pageNumber) => {
+  setCurrentPage(pageNumber);
+}
+
+// Calcular o índice inicial e final dos dados a serem exibidos na página atual
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = Math.min(startIndex + itemsPerPage, dados.length);
+
+const dadosPaginados = dados.slice(startIndex, endIndex);
 
   const verificar = (linha)=>{
     // console.log(linha)
@@ -57,7 +73,7 @@ function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, c
           <input type="text" className="grow outline-none" />
         </label>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overflow-hidden">
         <table className="table">
         {/* Verifica se a tabela tá vazia */}
          { col ?
@@ -70,7 +86,7 @@ function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, c
             </tr>
           </thead>
           <tbody>
-            {dados.map((linha, index) => (
+            {dadosPaginados.map((linha, index) => (
               <tr className="hover" key={index}>
                 {col.map((coluna, columnIndex) => (
                   <td className="text-sm text-black" key={columnIndex}>{linha[coluna]}</td>
@@ -82,6 +98,8 @@ function Tabela({ocorrencias, vitimas, municipios, colOcorrencias, colVitimas, c
           </> 
           : <p className="text-center text-2xl">Nenhum dado encontrado...</p>}
         </table>
+        <Paginacao totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange}/>
+
       </div>
     </div>
   );
