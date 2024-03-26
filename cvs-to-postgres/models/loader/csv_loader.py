@@ -13,9 +13,9 @@ class CsvDataLoader:
             reader = csv.reader(file)
             next(reader)  
             for row in reader:
-                uf, tipo_crime, ano, mes, sexo_vitma, vitima = row
-                sql = "INSERT INTO vitimasuf (uf, tipo_crime, ano, mes, sexo_vitima, vitima) VALUES (%s, %s, %s, %s, %s, %s)"
-                values = (uf, tipo_crime, ano, mes, sexo_vitma, vitima)
+                uf, tipo_crime, ano, mes, ocorrencias = row
+                sql = "INSERT INTO ocorrenciasuf (uf, tipo_crime, ano, mes, ocorrencias) VALUES (%s, %s, %s, %s, %s)"
+                values = (uf, tipo_crime, ano, mes, ocorrencias)
                 cursor.execute(sql, values)
 
         conn.commit()

@@ -9,7 +9,7 @@ def main():
     csv_loader = CsvDataLoader(strategy=postgres_strategy)
 
     # Caminho para o arquivo CSV com os dados de ocorrências de segurança
-    caminho_csv = "data/indicadoressegurancapublicauf - Vítimas.csv"
+    caminho_csv = "data/indicadoressegurancapublicauf - Ocorrências.csv"
 
     # Carrega os dados do arquivo CSV para o banco de dados
     csv_loader.load_data(caminho_csv)
