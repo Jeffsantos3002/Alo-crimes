@@ -108,7 +108,7 @@ const vitimas = [
     "Tipo Crime": "Estupro",
     "Ano": 2022,
     "Mês": "setembro",
-    "Sexo": "Masculino",
+    "Sexo": "Feminino",
     "Vítimas": 5
   },
   {
@@ -124,7 +124,7 @@ const vitimas = [
     "Tipo Crime": "Estupro",
     "Ano": 2022,
     "Mês": "julho",
-    "Sexo": "Masculino",
+    "Sexo": "Feminino",
     "Vítimas": 10
   },
   {
@@ -252,7 +252,7 @@ const vitimas = [
     "Tipo Crime": "Estupro",
     "Ano": 2022,
     "Mês": "setembro",
-    "Sexo": "Masculino",
+    "Sexo": "Feminino",
     "Vítimas": 5
   },
   {
@@ -268,7 +268,7 @@ const vitimas = [
     "Tipo Crime": "Estupro",
     "Ano": 2022,
     "Mês": "julho",
-    "Sexo": "Masculino",
+    "Sexo": "Feminino",
     "Vítimas": 10
   },
   {
