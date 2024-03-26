@@ -25,12 +25,12 @@ function Navbar(){
   ]
     
   return(
-    <header className="drawer">
+    <header className="drawer bg-blue z-50 fixed">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       
       <div className="drawer-content flex flex-col">
           {/* NavBar */}
-        <div className="w-full lg:px-12 navbar bg-blue">
+        <div className="w-full lg:px-12 navbar ">
           {/* Icone */}
           <div className="flex-none lg:hidden">
             <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
