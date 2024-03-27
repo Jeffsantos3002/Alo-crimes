@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
-import DetalhesGraficoPizza from "../DetalhesGraficoPizza";
 
 import ocorrencias from "../../../data/ocorrencias";
 import vitimas from "../../../data/vitimas";
